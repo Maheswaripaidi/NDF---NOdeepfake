@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Spline+Sans%3Awght%40400%3B500%3B700"
+    />
+
+    <title>NDF</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+
+  <div
+    style="width: 400px; height: 600px; font-family: 'Spline Sans', 'Noto Sans', sans-serif;"
+    class="bg-[#171122] p-4"
+  >
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-[#171122] dark justify-between group/design-root overflow-x-hidden"
+      style='font-family: "Spline Sans", "Noto Sans", sans-serif;'
+    >
+      <div>
+        <div class="flex items-center bg-[#171122] p-4 pb-2 justify-between">
+         
+          <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Let's Start</h2>
+        </div>
+        <h1 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-3 pt-5">Select an image</h1>
+        <div class="flex w-full grow bg-[#171122] @container p-4">
+          <div class="w-full gap-1 overflow-hidden bg-[#171122] @[480px]:gap-2 aspect-[2/3] rounded-xl flex">
+            <div
+              class="w-full bg-center bg-no-repeat bg-cover aspect-auto rounded-none flex-1"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDy4HvJ104jvZ_dZlUDRBF6dsQg3Ah2PGyWJctKh1uK9QfZ1rj0DSxLDIg7HiQaxik_PKK7VWWDp6xB277C6Utcz_aegB0ANavLdi3cTIXjwmNLWmEBiJrhD8dzNjzExmWLGqWF_7ldCS8TqotyzA2D8SwBNynt18-1mRXTh8ynPaGbBY_NMT4LNZeCxGpAcf8hOuh1KO5XAP05fT-PiRrW9WdI0Ptfswnd75DG9z0rCWwj6BQyMbh-rNRNedRGSDeLiuf8KdhWZ2hE");'
+            >
+
+<div class="p-4">
+  <label class="block mb-2 text-white font-medium">Upload an Image</label>
+  <input type="file" id="imageInput" accept="image/*" class="block w-full text-sm text-white bg-[#302447] rounded-lg cursor-pointer border border-gray-300 focus:outline-none">
+  <div id="preview" class="mt-4">
+    <!-- Image preview goes here -->
+  </div>
+</div>
+</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="flex px-4 py-3">
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#7d47ea] text-white text-base font-bold leading-normal tracking-[0.015em]"
+          >
+          <a href="s3.html" class="bg-[#7d47ea] text-white px-4 py-2 rounded">Click to be Protected</a>
+          </button>
+        </div>
+        <div class="h-5 bg-[#171122]"></div>
+      </div>
+    </div>
+</div>
+
+<script>
+  const imageInput = document.getElementById('imageInput');
+  const preview = document.getElementById('preview');
+  const protectButton = document.getElementById('protectButton');
+  let selectedFile = null;
+
+  imageInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        preview.innerHTML = `<img src="${reader.result}" alt="Preview" class="w-full rounded-lg max-h-[300px] object-contain" />`;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  protectButton.addEventListener('click', async function () {
+    if (!selectedFile) {
+      alert("Please upload an image first.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+
+    try {
+      const res = await fetch('http://localhost:5000/api/adversarial', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await res.json();
+      localStorage.setItem('processedImage', data.image_url);
+
+      // Redirect to next screen
+      window.location.href = "s3.html";
+
+    } catch (err) {
+      alert("Failed to upload image.");
+      console.error(err);
+    }
+  });
+</script>
+
+  </body>
+
+
+</html>

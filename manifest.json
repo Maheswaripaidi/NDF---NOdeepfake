@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "NoDeepFake (NDF)",
+  "version": "1.0",
+  "description": "Protect your images from deepfakes using adversarial noise.",
+  "action": {
+    "default_popup": "s1.html",
+    "default_icon": {
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "128": "icon128.png"
+  },
+  "permissions": []
+}

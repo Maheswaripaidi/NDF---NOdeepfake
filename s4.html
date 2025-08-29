@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Spline+Sans%3Awght%40400%3B500%3B700"
+    />
+
+    <title>NDF</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+
+<div
+    style="width: 400px; height: 600px; font-family: 'Spline Sans', 'Noto Sans', sans-serif;"
+    class="bg-[#171122] p-4"
+  >
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-[#171122] dark justify-between group/design-root overflow-x-hidden"
+      style='font-family: "Spline Sans", "Noto Sans", sans-serif;'
+    >
+      <div>
+        <div class="flex items-center bg-[#171122] p-4 pb-2 justify-between">
+          
+          <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">It's Done</h2>
+        </div>
+        <h1 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-3 pt-5">Download your protected image</h1>
+        <div class="flex w-full grow bg-[#171122] @container p-4">
+          <div class="w-full gap-1 overflow-hidden bg-[#171122] @[480px]:gap-2 aspect-[2/3] rounded-xl flex">
+            <div
+              class="w-full bg-center bg-no-repeat bg-cover aspect-auto rounded-none flex-1"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC7NI1908XCB2ZuUp3CYxSxUpCY-ORG-4BX7VvjVIiQFPY4Hee7OYI6PZr_yJqIXY_rUjZiVm7_qIl4bTpg0tMz5fmimkWwN_h5_V6wOpH7q-shdeeZyC82RwMP7fVvuCb3v6Mpy7nzNrLrJ7A6vUiXL21J6z_vzq0pz0pztBBqjxUL34dkTVn_YI-Pxn9ghHeG5jSESJ_wjt1ub7_JCumrb-EulJ-Js-YxMNgHqbWBfta0rMNJ4GhSDtppbS0nnMO8wJNEWY2Oc7K_");'
+            ></div>
+          </div>
+        </div>
+        <p class="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">
+          This image has been protected with noise to prevent deepfakes. Download it to use on social media or other platforms.
+        </p>
+      </div>
+      <div>
+        <div class="flex px-4 py-3">
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#7d47ea] text-white text-base font-bold leading-normal tracking-[0.015em]"
+          >
+          <a href="s5.html" class="bg-[#7d47ea] text-white px-4 py-2 rounded">Download</a>
+            
+          </button>
+        </div>
+        <div class="h-5 bg-[#171122]"></div>
+      </div>
+    </div>
+</div>
+
+<script>
+  const imageData = localStorage.getItem('processedImage');
+  const img = document.getElementById('outputImage');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  if (imageData) {
+    img.src = imageData;
+    downloadBtn.href = imageData;
+  } else {
+    img.alt = "No image found.";
+    downloadBtn.href = "#";
+  }
+</script>
+
+  </body>
+</html>
